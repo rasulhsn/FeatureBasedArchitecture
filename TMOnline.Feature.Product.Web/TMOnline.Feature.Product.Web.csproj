@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TMOnline.Feature.Product.Core\TMOnline.Feature.Product.Core.csproj" />
+    <ProjectReference Include="..\TMOnline.Feature.Product.Infrastructure\TMOnline.Feature.Product.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
