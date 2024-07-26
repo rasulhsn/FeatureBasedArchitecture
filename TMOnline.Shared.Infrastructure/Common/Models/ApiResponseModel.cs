@@ -7,7 +7,7 @@ namespace TMOnline.Shared.Infrastructure.Models
 {
     [Serializable]
     [DataContract(Name = "ApiResponse")]
-    public class ApiResponseModel
+    public record ApiResponseModel
     {
         [DataMember(Name = "ErrorMessages")]
         public IEnumerable<string> ErrorMessages { get; internal set; }
@@ -26,22 +26,16 @@ namespace TMOnline.Shared.Infrastructure.Models
 
         public ApiResponseModel() { }
 
-        public ApiResponseModel(IEnumerable<string> errorMessages)
-        {
-            this.ErrorMessages = errorMessages;
-        }
+        public ApiResponseModel(IEnumerable<string> errorMessages) => ErrorMessages = errorMessages;
     }
 
     [Serializable]
     [DataContract(Name = "ApiResponse")]
-    public class ApiResponseModel<TData> : ApiResponseModel
+    public record ApiResponseModel<TData> : ApiResponseModel
     {
         [DataMember(Name = "Data")]
         public TData Data { get; internal set; }
 
-        public ApiResponseModel(TData data)
-        {
-            this.Data = data;
-        }
+        public ApiResponseModel(TData data) => Data = data;
     }
 }

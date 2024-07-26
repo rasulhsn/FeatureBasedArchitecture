@@ -3,7 +3,6 @@ using System.Reflection;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
 using TMOnline.Feature.Product.Core.Abstractions;
 using TMOnline.Feature.Product.Infrastructure.Persistence;
 using TMOnline.Shared.Infrastructure.Extensions;

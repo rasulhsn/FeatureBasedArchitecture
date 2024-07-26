@@ -19,8 +19,8 @@ namespace TMOnline.Shared.Core.Exceptions
 
         public FeatureException(FeatureExceptionType exceptionType,params string[] errorMessages)
         {
-            this.ExceptionType = exceptionType;
-            this.ErrorMessages = errorMessages;
+            ExceptionType = exceptionType;
+            ErrorMessages = errorMessages;
         }
     }
 }

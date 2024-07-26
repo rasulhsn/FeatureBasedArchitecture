@@ -11,19 +11,10 @@ namespace TMOnline.Feature.Product.Infrastructure
     {
         private readonly IMapper _autoMapper;
 
-        public GenericMapper(Assembly assembly)
-        {
-            this._autoMapper = AutoMapperFactory.Create(assembly);
-        }
+        public GenericMapper(Assembly assembly) => _autoMapper = AutoMapperFactory.Create(assembly);
 
-        public TDestination Map<TSource, TDestination>(TSource source)
-        {
-            return this._autoMapper.Map<TSource, TDestination>(source);
-        }
+        public TDestination Map<TSource, TDestination>(TSource source) => _autoMapper.Map<TSource, TDestination>(source);
 
-        public TDestination Map<TDestination>(object source)
-        {
-            return this._autoMapper.Map<TDestination>(source);
-        }
+        public TDestination Map<TDestination>(object source) => _autoMapper.Map<TDestination>(source);
     }
 }

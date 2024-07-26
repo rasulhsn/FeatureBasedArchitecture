@@ -10,7 +10,7 @@ namespace TMOnline.Shared.Core.Exceptions
 
         public ValidationErrorException(IEnumerable<string> errorMessages)
         {
-            this.ErrorMessages = errorMessages;
+            ErrorMessages = errorMessages;
         }
     }
 }

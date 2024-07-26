@@ -22,8 +22,6 @@ namespace TMOnline.Shared.Infrastructure.Persistence
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-        {
-            return (await base.SaveChangesAsync(true, cancellationToken));
-        }
+            => (await base.SaveChangesAsync(true, cancellationToken));
     }
 }

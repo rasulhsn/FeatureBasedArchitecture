@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-
 using MediatR;
-
 using Microsoft.EntityFrameworkCore;
-
 using TMOnline.Feature.Product.Core.Abstractions;
 using TMOnline.Shared.Core;
 using TMOnline.Shared.Core.Exceptions;
+using ProductEntity = TMOnline.Shared.Entities.Product;
+
 
 namespace TMOnline.Feature.Product.Core.Commands.Handlers
 {
-    internal class ProductCommandHandler : IRequestHandler<AddProductCommand, Shared.Entities.Product>
+    internal class ProductCommandHandler : IRequestHandler<AddProductCommand, ProductEntity>
     {
         private readonly IProductDbContext _productDbContext;
         private readonly IGenericMapper _mapper;
@@ -20,11 +19,11 @@ namespace TMOnline.Feature.Product.Core.Commands.Handlers
         public ProductCommandHandler(IProductDbContext productDbContext,
                                         IGenericMapper genericMapper)
         {
-            this._productDbContext = productDbContext;
-            this._mapper = genericMapper;
+            _productDbContext = productDbContext;
+            _mapper = genericMapper;
         }
 
-        public async Task<Shared.Entities.Product> Handle(AddProductCommand request, CancellationToken cancellationToken)
+        public async Task<ProductEntity> Handle(AddProductCommand request, CancellationToken cancellationToken)
         {
             if(!request.TryValidate(out IEnumerable<string> errorMessages))
             {
@@ -32,7 +31,7 @@ namespace TMOnline.Feature.Product.Core.Commands.Handlers
             }
 
             bool productExists = await _productDbContext.DbContext
-                                                .Set<Shared.Entities.Product>()
+                                                .Set<ProductEntity>()
                                                 .AnyAsync(p => p.TransactionYearId == request.TransactionYearId &&
                                                             p.Name.ToLower() == request.Name.ToLower());
 
@@ -42,9 +41,9 @@ namespace TMOnline.Feature.Product.Core.Commands.Handlers
                                 $"Product '{request.Name}' already exists for transaction year.");
             }
 
-            Shared.Entities.Product newProduct = _mapper.Map<AddProductCommand, Shared.Entities.Product>(request);
+            ProductEntity newProduct = _mapper.Map<AddProductCommand, ProductEntity>(request);
 
-            await _productDbContext.DbContext.Set<Shared.Entities.Product>().AddAsync(newProduct);
+            await _productDbContext.DbContext.Set<ProductEntity>().AddAsync(newProduct);
             await _productDbContext.SaveChangesAsync();
 
             return newProduct;

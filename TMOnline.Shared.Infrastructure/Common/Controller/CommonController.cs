@@ -7,15 +7,9 @@ namespace TMOnline.Shared.Infrastructure.Controller
 {
     public abstract class CommonController : ControllerBase
     {
-        protected IActionResult ReturnNotFound()
-        {
-            return StatusCode(404, new ApiResponseModel());
-        }
+        protected IActionResult ReturnNotFound() => StatusCode(404, new ApiResponseModel());
 
-        protected IActionResult ReturnFail(ValidationErrorException validationError)
-        {
-            return StatusCode(400, new ApiResponseModel(validationError.ErrorMessages));
-        }
+        protected IActionResult ReturnFail(ValidationErrorException validationError)  => StatusCode(400, new ApiResponseModel(validationError.ErrorMessages));
 
         protected IActionResult ReturnFail(FeatureException featureException)
         {
@@ -29,9 +23,6 @@ namespace TMOnline.Shared.Infrastructure.Controller
             }
         }
 
-        protected IActionResult ReturnSuccess<TResponse>(TResponse response)
-        {
-            return this.Ok(new ApiResponseModel<TResponse>(response));
-        }
+        protected IActionResult ReturnSuccess<TResponse>(TResponse response) => this.Ok(new ApiResponseModel<TResponse>(response));
     }
 }
