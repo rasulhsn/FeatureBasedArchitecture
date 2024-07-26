@@ -1,17 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using TMOnline.Feature.Product.Core.Queries;
+using TMOnline.Shared.Infrastructure.Controller;
 
 namespace TMOnline.Feature.Product.Web.Controllers
 {
     [ApiController]
     [Route("/api/currencies")]
-    internal class CurrenciesController : ControllerBase
+    internal class CurrenciesController : CommonController
     {
         private readonly IMediator _mediator;
 
-        public CurrenciesController(IMediator mediator)
-        {
-            this._mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
-        }
+        public CurrenciesController(IMediator mediator) => _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
 
         /// <summary>
         /// Get all products

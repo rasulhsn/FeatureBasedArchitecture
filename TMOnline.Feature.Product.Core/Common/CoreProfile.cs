@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using TMOnline.Feature.Product.Core.Commands;
+using ProductEntity = TMOnline.Shared.Entities.Product;
+
 
 namespace TMOnline.Feature.Product.Core
 {
@@ -6,7 +9,7 @@ namespace TMOnline.Feature.Product.Core
     {
         public CoreProfile()
         {
-            CreateMap<Commands.AddProductCommand, Shared.Entities.Product>(MemberList.None)
+            CreateMap<AddProductCommand, ProductEntity>(MemberList.None)
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.TransactionYearId, opt => opt.MapFrom(src => src.TransactionYearId));
         }

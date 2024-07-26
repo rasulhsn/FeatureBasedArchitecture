@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
 using MediatR;
-
 using Microsoft.AspNetCore.Mvc;
-
 using TMOnline.Feature.Product.Core.Commands;
 using TMOnline.Feature.Product.Core.Queries;
-
 using TMOnline.Shared.Core.Exceptions;
 using TMOnline.Shared.Infrastructure.Controller;
 
@@ -20,10 +16,7 @@ namespace TMOnline.Feature.Product.Web.Controllers
     {
         private readonly IMediator _mediator;
 
-        public ProductsController(IMediator mediator)
-        {
-            this._mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
-        }
+        public ProductsController(IMediator mediator) => _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
 
         /// <summary>
         /// Get all products
@@ -34,6 +27,7 @@ namespace TMOnline.Feature.Product.Web.Controllers
             Trace.TraceInformation($"{nameof(ProductsController)}/{nameof(GetAllAsync)}()");
 
             var products = await _mediator.Send(new GetAllProductsQuery());
+
             return ReturnSuccess(products);
         }
 
@@ -46,6 +40,7 @@ namespace TMOnline.Feature.Product.Web.Controllers
             Trace.TraceInformation($"{nameof(ProductsController)}/{nameof(GetAllByYearAsync)}({yearId})");
 
             var products = await _mediator.Send(new GetAllProductsByYearQuery(yearId));
+
             return ReturnSuccess(products);
         }
 
