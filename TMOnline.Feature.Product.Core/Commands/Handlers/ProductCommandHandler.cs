@@ -24,7 +24,8 @@ namespace TMOnline.Feature.Product.Core.Commands.Handlers
             this._mapper = genericMapper;
         }
 
-        public async Task<Shared.Entities.Product> Handle(AddProductCommand request, CancellationToken cancellationToken)
+        public async Task<Shared.Entities.Product> Handle(AddProductCommand request,
+                                                                    CancellationToken cancellationToken)
         {
             if(!request.TryValidate(out IEnumerable<string> errorMessages))
             {
